@@ -31,12 +31,12 @@ async function generateLibrary(
     simpleName: true,
     standalone: true,
     buildable: true,
-    prefix: `bt-libs-${type}`,
+    prefix: `ng-libs-${type}`,
     style: 'scss',
     changeDetection: 'OnPush',
     directory: `libs/${options.domain}/${type}`,
     tags: `domain:${options.domain}, type:${type}`,
-    importPath: `@bt-libs/${options.domain}/${type}/${options.name}`,
+    importPath: `@ng-libs/${options.domain}/${type}/${options.name}`,
   });
 }
 
