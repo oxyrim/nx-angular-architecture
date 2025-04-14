@@ -21,6 +21,9 @@
       "@ng-libs/shared/ui/common-components": [
         "libs/shared/ui/common-components/src/index.ts"
       ],
+      "@ng-libs/shared/ui/common-directives": [
+        "libs/shared/ui/common-directives/src/index.ts"
+      ],
       "@nx-tools/workspace-generators-plugin": [
         "libs/workspace-generators-plugin/src/index.ts"
       ]
