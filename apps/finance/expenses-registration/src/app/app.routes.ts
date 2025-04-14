@@ -1,6 +1,4 @@
 import { ActivatedRouteSnapshot, ResolveFn, Route } from '@angular/router';
-import { ExpensesOverviewPageComponent } from './pages/expenses-overview-page/expenses-overview-page.component';
-import { ExpensesApprovalPageComponent } from './pages/expenses-approval-page/expenses-approval-page.component';
 
 export const titleResolver: ResolveFn<string> = (
   route: ActivatedRouteSnapshot
@@ -9,12 +7,15 @@ export const titleResolver: ResolveFn<string> = (
 export const appRoutes: Route[] = [
   {
     path: 'expenses-overview',
-    component: ExpensesOverviewPageComponent,
+    loadComponent: () =>
+      import('./pages/expenses-overview-page/expenses-overview-page.component'),
     title: titleResolver,
   },
   {
     path: 'expenses-approval',
-    component: ExpensesApprovalPageComponent,
+    loadComponent: () =>
+      import('./pages/expenses-approval-page/expenses-approval-page.component'),
     title: titleResolver,
   },
+  { path: '', pathMatch: 'full', redirectTo: '/expenses-overview' },
 ];
