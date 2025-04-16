@@ -30,6 +30,9 @@
       "@ng-libs/shared/util/common-pipes": [
         "libs/shared/util/common-pipes/src/index.ts"
       ],
+      "@ng-libs/shared/util/form-validators": [
+        "libs/shared/util/form-validators/src/index.ts"
+      ],
       "@nx-tools/workspace-generators-plugin": [
         "libs/workspace-generators-plugin/src/index.ts"
       ]
