@@ -13,8 +13,10 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class AddExpenseComponent {
   addExpenseForm = new FormGroup({
     description: new FormControl(''),
-    amountExclVat: new FormControl(null),
-    vatPercentage: new FormControl(null),
+    amount: new FormGroup({
+      amountExclVat: new FormControl(null),
+      vatPercentage: new FormControl(null),
+    }),
     date: new FormControl(''),
   });
 
