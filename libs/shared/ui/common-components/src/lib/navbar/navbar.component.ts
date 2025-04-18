@@ -15,7 +15,6 @@ export class NavbarComponent {
 }
 
 function addHome(items: NavbarItem[]) {
-  console.log(items);
   return [{ label: 'Home', route: '/' }, ...items];
 }
 

@@ -3,11 +3,13 @@
     <label for="description">Description</label>
     <input
       required
+      [ngLibsUtilMaxWordCount]="3"
       [(ngModel)]="expenseToAdd.description"
       type="text"
       class="form-control"
       id="description"
       name="description"
+      #description="ngModel"
     />
   </div>
   <fieldset ngModelGroup="amount">
