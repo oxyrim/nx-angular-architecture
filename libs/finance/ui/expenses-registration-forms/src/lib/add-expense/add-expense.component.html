@@ -1,23 +1,20 @@
-<form #addExpenseForm="ngForm" (ngSubmit)="onSubmit()">
+<div>Form Value: {{ addExpenseForm.value | json }}</div>
+<form [formGroup]="addExpenseForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="description">Description</label>
     <input
-      required
-      [ngLibsUtilMaxWordCount]="3"
-      [(ngModel)]="expenseToAdd.description"
+      formControlName="description"
       type="text"
       class="form-control"
       id="description"
       name="description"
-      #description="ngModel"
     />
   </div>
-  <fieldset ngModelGroup="amount">
+  <fieldset>
     <div class="form-group">
       <label for="amountExclVat">Amount excl. VAT:</label>
       <input
-        [max]="100"
-        [(ngModel)]="expenseToAdd.amountExclVat"
+        formControlName="amountExclVat"
         type="number"
         class="form-control"
         id="amountExclVat"
@@ -27,8 +24,7 @@
     <div class="form-group">
       <label for="vatPercentage">VAT percentage:</label>
       <input
-        [max]="100"
-        [(ngModel)]="expenseToAdd.vatPercentage"
+        formControlName="vatPercentage"
         class="form-control"
         id="vatPercentage"
         type="number"
@@ -39,18 +35,12 @@
   <div class="form-group">
     <label for="date">Date:</label>
     <input
-      [(ngModel)]="expenseToAdd.date"
+      formControlName="date"
       type="date"
       class="form-control"
       id="date"
       name="date"
     />
   </div>
-  <button
-    [disabled]="addExpenseForm.invalid"
-    type="submit"
-    class="btn btn-primary"
-  >
-    Submit
-  </button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
