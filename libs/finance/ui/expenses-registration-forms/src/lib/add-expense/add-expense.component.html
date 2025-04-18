@@ -1,5 +1,5 @@
 <form [formGroup]="addExpenseForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
+  <div class="form-group m-2">
     <label for="description">Description</label>
     <input
       formControlName="description"
@@ -10,7 +10,7 @@
     />
   </div>
   <fieldset formGroupName="amount">
-    <div class="form-group">
+    <div class="form-group m-2">
       <label for="amountExclVat">Amount excl. VAT:</label>
       <input
         formControlName="amountExclVat"
@@ -20,7 +20,7 @@
         name="amountExclVat"
       />
     </div>
-    <div class="form-group">
+    <div class="form-group m-2">
       <label for="vatPercentage">VAT percentage:</label>
       <input
         formControlName="vatPercentage"
@@ -31,7 +31,7 @@
       />
     </div>
   </fieldset>
-  <div class="form-group">
+  <div class="form-group m-2">
     <label for="date">Date:</label>
     <input
       formControlName="date"
@@ -41,5 +41,25 @@
       name="date"
     />
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <fieldset formArrayName="tags">
+    @for (tag of addExpenseForm.controls.tags.controls; track $index; let i =
+    $index) {
+    <div class="form-group m-2">
+      <label for="tag-{{ i }}">Tag:</label>
+      <input
+        class="form-control mb-2 w-25"
+        [formControlName]="i"
+        type="text"
+        id="tag-{{ i }}"
+      />
+      <div>
+        @if (i > 0) {
+        <button class="btn btn-secondary me-2" (click)="removeTag(i)">-</button>
+        }
+        <button class="btn btn-primary" (click)="addTag()">+</button>
+      </div>
+    </div>
+    }
+  </fieldset>
+  <button type="submit" class="btn btn-primary m-2">Submit</button>
 </form>

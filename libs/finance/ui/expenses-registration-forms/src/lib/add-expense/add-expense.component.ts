@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'ng-libs-ui-add-expense',
@@ -18,7 +23,16 @@ export class AddExpenseComponent {
       vatPercentage: new FormControl(null),
     }),
     date: new FormControl(''),
+    tags: new FormArray([new FormControl('')]),
   });
+
+  removeTag(index: number): void {
+    this.addExpenseForm.controls.tags.removeAt(index);
+  }
+
+  addTag() {
+    this.addExpenseForm.controls.tags.push(new FormControl(''));
+  }
 
   onSubmit() {
     //
