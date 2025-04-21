@@ -1,12 +1,20 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { AddExpense } from './add-expense.interface';
+import { maxWordCountValidator } from '@ng-libs/shared/util/form-validators';
 
 @Component({
   selector: 'ng-libs-ui-add-expense',
@@ -25,13 +33,24 @@ export class AddExpenseComponent {
     });
   }
 
+  @Output() addExpense = new EventEmitter<AddExpense>();
+
   addExpenseForm = new FormGroup({
-    description: new FormControl(''),
+    description: new FormControl('', [
+      Validators.required,
+      maxWordCountValidator(10),
+    ]),
     amount: new FormGroup({
-      amountExclVat: new FormControl(null),
-      vatPercentage: new FormControl(null),
+      amountExclVat: new FormControl<number | null>(null, [
+        Validators.required,
+      ]),
+      vatPercentage: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100),
+      ]),
     }),
-    date: new FormControl(['']),
+    date: new FormControl([''], [Validators.required]),
     tags: new FormArray([new FormControl('')]),
   });
 
@@ -44,6 +63,9 @@ export class AddExpenseComponent {
   }
 
   onSubmit() {
-    //
+    this.addExpense.emit(
+      structuredClone(this.addExpenseForm.value as AddExpense)
+    );
+    this.addExpenseForm.reset();
   }
 }

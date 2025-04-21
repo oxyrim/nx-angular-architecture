@@ -8,6 +8,13 @@
       id="description"
       name="description"
     />
+    @if(addExpenseForm.touched &&
+    addExpenseForm.controls.description.hasError('required')) {
+    <span>This field is required</span>
+    } @if(addExpenseForm.touched &&
+    addExpenseForm.controls.description.hasError('maxWordCount')) {
+    <span>The maximum allowed number of characters is 10.</span>
+    }
   </div>
   <fieldset formGroupName="amount">
     <div class="form-group m-2">
@@ -61,5 +68,11 @@
     </div>
     }
   </fieldset>
-  <button type="submit" class="btn btn-primary m-2">Submit</button>
+  <button
+    type="submit"
+    [disabled]="addExpenseForm.invalid"
+    class="btn btn-primary m-2"
+  >
+    Submit
+  </button>
 </form>
