@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
@@ -6,6 +6,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { AddExpense } from './add-expense.interface';
 
 @Component({
   selector: 'ng-libs-ui-add-expense',
@@ -16,13 +17,21 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddExpenseComponent {
+  @Input() public set expenseToAdd(value: AddExpense) {
+    this.addExpenseForm.patchValue(value);
+    this.addExpenseForm.controls.tags.clear();
+    value.tags?.forEach((tag) => {
+      this.addExpenseForm.controls.tags.push(new FormControl(tag));
+    });
+  }
+
   addExpenseForm = new FormGroup({
     description: new FormControl(''),
     amount: new FormGroup({
       amountExclVat: new FormControl(null),
       vatPercentage: new FormControl(null),
     }),
-    date: new FormControl(''),
+    date: new FormControl(['']),
     tags: new FormArray([new FormControl('')]),
   });
 

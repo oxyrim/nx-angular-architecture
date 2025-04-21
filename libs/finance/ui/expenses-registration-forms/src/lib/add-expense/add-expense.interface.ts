@@ -1,6 +1,9 @@
 export interface AddExpense {
-  description: string;
-  amountExclVat: number | null;
-  vatPercentage: number | null;
-  date: Date | null;
+  description?: string;
+  amount?: {
+    amountExclVat?: number;
+    vatPercentage?: number;
+  };
+  date?: string[];
+  tags?: string[];
 }
